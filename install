@@ -1,0 +1,222 @@
+#!/bin/bash
+
+clear
+
+stty erase '^?'
+echo
+echo "Bem vindo a automatizacao de scaffolds para o joomla3."
+echo "JoomlaPro / AtomTech  v. 1.0"
+
+echo
+echo "Nao se esqueca voce precisa estar dentro do diretorio do seu projeto."
+echo
+echo "E mais importante ainda, tenha certeza de ter instalado unzip. sudo apt-get isntall unzip"
+echo
+echo -n "Tudo certo? Continuar (y/n) "
+read sample
+
+if [ "$sample" = "n" ]; then
+exit
+fi
+echo
+echo -n "Baixar ultima versao do JoomlaPro Scaffold? Continuar (y/n) Obs: Eh necessario ter uma versao. Se nao tem, baixe. Se ja tem, prossiga."
+read versao
+
+if [ "$versao" = "y" ]; then
+echo
+echo "Downloading package..."
+echo
+sudo rm -rf master.zip
+wget https://github.com/joomlapro/joomla3-scaffold/archive/master.zip
+echo "O arquivo master.zip sera mantido na sua pasta principal do projeto, para que vc possa criar quantos modulos, templates ou componentes quiser."
+echo "Caso queira atualiza-lo, na opcao anterior baixe a ultima versao do server JoomlaPro"
+echo "done!"
+fi
+
+echo
+echo "Extracting data..."
+echo
+unzip -o master.zip
+echo "done!"
+
+echo
+echo -n "Numero do Tipo a ser gerado? 1-modulo,  2-component,  3-template"
+echo
+read scaffold
+
+
+##### MODULO
+if [ "$scaffold" = "1" ]; then
+echo
+echo "Now installing Joomla3 module files..."
+
+echo
+echo -n "Qual o nome do modulo? ex: login, menu, feed, (sempre no singular)"
+echo
+read modulo
+modulo="mod_$modulo"
+
+echo "Criando modulo"
+echo "."
+sudo mv joomla3-scaffold-master/modules/* modules/$modulo
+echo ".."
+cd modules/$modulo
+sudo mv mod_hello.php $modulo.php
+sudo mv mod_hello.xml $modulo.xml
+echo "..."
+cd language
+cd pt-BR
+sudo mv pt-BR.mod_hello.ini pt-BR.$modulo.ini
+sudo mv pt-BR.mod_hello.sys.ini pt-BR.$modulo.sys.ini
+echo "...."
+cd ..
+cd ..
+sudo mv media ../../media/$modulo
+echo "done!"
+echo
+echo "Foi instalado o modulo $modulo"
+echo "Finished installing the latest stable version of joomla3-scaffold by Jommla-Pro"
+fi
+
+
+##### COMPONENT
+if [ "$scaffold" = "2" ]; then
+echo
+echo "Now installing Joomla3 component files..."
+
+echo
+echo -n "Qual o nome do component? ex: banner, slideshow, contato, (sempre no singular.)"
+echo
+read component
+
+echo "Criando area administrativa"
+echo "."
+sudo mv joomla3-scaffold-master/components/com_component/admin administrator/components/com_$component
+cd administrator/components/com_$component
+sudo mv hello.php $component.php
+sudo mv hello.xml $component.xml
+echo ".."
+cd controllers
+sudo mv hello.php $component.php
+sudo mv hellos.php $component"s.php"
+cd ..
+
+cd helpers
+sudo mv hello.php $component.php
+cd ..
+echo "..."
+
+cd language
+cd pt-BR
+sudo mv pt-BR.com_hello.ini pt-BR.com_"$component".ini
+sudo mv pt-BR.com_hello.sys.ini pt-BR.com_"$component".sys.ini
+cd ..
+cd ..
+
+echo "...."
+cd models
+sudo mv hello.php $component.php
+sudo mv hellos.php $component"s.php"
+cd forms
+sudo mv hello.xml $component.xml
+cd ..
+cd ..
+
+cd tables
+sudo mv hello.php $component.php
+cd ..
+
+echo "....."
+cd views
+sudo mv hello $component
+sudo mv hellos $component"s"
+cd ..
+cd ..
+cd ..
+cd ..
+echo "done!"
+echo
+echo "Criando compomente site"
+sudo mv joomla3-scaffold-master/components/com_component/site components/com_$component
+echo "."
+cd components
+cd com_$component
+sudo mv hello.php $component.php
+
+cd controllers
+sudo mv hello.php $component.php
+cd ..
+echo ".."
+cd language
+cd pt-BR
+sudo mv pt-BR.com_hello.ini pt-BR.com_"$component".ini
+cd ..
+cd ..
+echo "..."
+cd models
+sudo mv hello.php $component.php
+cd forms
+sudo mv hello.xml $component.xml
+cd ..
+cd ..
+echo "...."
+cd views
+sudo mv hello $component
+cd ..
+cd ..
+cd ..
+echo "done!"
+echo
+echo "Criando media"
+echo "."
+sudo mv joomla3-scaffold-master/components/com_component/media media/com_$component
+echo "done!"
+echo
+echo "Foi instalado o componente com_$component"
+echo "Finished installing the latest stable version of joomla3-scaffold by Jommla-Pro"
+fi
+
+
+##### TEMPLATE
+if [ "$scaffold" = "3" ]; then
+echo
+echo "Now installing Joomla3 template files..."
+
+echo
+echo -n "Qual o nome do template? ex: blue, loja, carro (sempre no singular)"
+echo
+read template
+
+echo "Criando template"
+echo "."
+sudo mv joomla3-scaffold-master/templates/tpl_template templates/$template
+cd templates/$template
+
+echo ".."
+cd language
+cd pt-BR
+sudo mv pt-BR.tpl_hello.ini pt-BR.tpl_"$template".ini
+sudo mv pt-BR.tpl_hello.sys.ini pt-BR.tpl_"$template".sys.ini
+cd ..
+cd ..
+
+echo "..."
+cd ..
+cd ..
+echo "done!"
+echo
+echo "Foi instalado  o template $template"
+echo "Finished installing the latest stable version of joomla3-scaffold by Jommla-Pro"
+fi
+
+echo
+echo "Cleaning up files..."
+rm -rf joomla3-scaffold-master
+
+echo
+echo "Fim..."
+echo
+echo "www.joomlapro.com.br"
+echo "www.atomtech.com.br"
+echo
+exit
