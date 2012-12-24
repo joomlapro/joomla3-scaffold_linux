@@ -1,29 +1,21 @@
-Joomla3 Scaffold Install - for Linux
+Joomla! Scaffold for Joomla! 3.0
+================================
 
-Um helper que automatiza a criação dos arquivos, nomes de arquivos, pastas, etc... da ultima versão 
-do scaffold do joomla3.
+Simple shell script to automatic create extensions in CMS Joomla! 3.0
 
-Faz download dos arquivos
-Descompacta
-Cria as pastas e arquivos
+## Installation
 
-Para completar, use os snipets tambem disponibilizados em nosso github.com/joomlapro
+Just download and install.
 
-1 - Copie o arquivo install, para a pasta principal do seu projeto joomla 3.
+## Authors
 
-digite na linha de comando: ./install
+* Tiago Garcia
+* Bruno Batista
 
-Caso queira alterar algo no arquivo...
-sudo vi install
+## License
 
-Aperte ESC e para salvar e sair do editor, escreva: :x
+Licensed under the terms of the MIT license.
 
-Se for necessario setar as permissões: chmod +x install
+## Bugs/Requests
 
-Para rodar a instalação novamente: ./install
-
-Fique a vontade para fazer alteracoes.
-
-Qualquer duvida use o facebook/joomlapro
-
-by Tiago Garcia - Atomtech
+* You can [report a bug or request a feature here](http://github.com/joomlapro/joomla3-scaffold_linux/issues)
