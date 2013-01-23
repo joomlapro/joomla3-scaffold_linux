@@ -5,7 +5,11 @@ Simple shell script to automatic create extensions in CMS Joomla! 3.0
 
 ## Installation
 
-Just download file and run install.
+$ chmod +x install
+Just download file and run $ ./install
+
+
+
 
 ## Authors
 
