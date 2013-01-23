@@ -10,7 +10,7 @@ echo "JoomlaPro / AtomTech  v. 1.0"
 echo
 echo "Nao se esqueca voce precisa estar dentro do diretorio do seu projeto."
 echo
-echo "E mais importante ainda, tenha certeza de ter instalado unzip. sudo apt-get isntall unzip"
+echo "E mais importante ainda, tenha certeza de ter instalado unzip. sudo apt-get install unzip"
 echo
 echo -n "Tudo certo? Continuar (y/n) "
 read sample
